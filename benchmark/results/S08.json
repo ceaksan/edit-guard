@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S08",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:27:25.434513",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 25000,
+      "tokens_out": 18000,
+      "tokens_total": 43000,
+      "duration_s": 50.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Read + 1 Write on 1053-line file with 10 changes spread across lines 49-733. All applied correctly. No lost-in-the-middle truncation. Line count preserved at 1053. Highest output token cost but lowest tool call count."
+    }
+  ]
+}

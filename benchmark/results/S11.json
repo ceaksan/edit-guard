@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S11",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T20:59:16.661972",
+      "success": true,
+      "tool_calls": 6,
+      "tokens_in": 12000,
+      "tokens_out": 2500,
+      "tokens_total": 14500,
+      "duration_s": 35.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Read + 5 bottom-up Edits on 1053-line file. All matched first try. Hook warned at 3 and 5 consecutive edits. No line drift because bottom-up order preserves line numbers."
+    }
+  ]
+}

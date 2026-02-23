@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S18",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:21:21.092675",
+      "success": true,
+      "tool_calls": 3,
+      "tokens_in": 5500,
+      "tokens_out": 2500,
+      "tokens_total": 8000,
+      "duration_s": 15.0,
+      "retries": 1,
+      "failure_mode": null,
+      "notes": "Generated diff via sed-modified copy + diff -u. First attempt had wrong patch header (patched /tmp instead of fixture). 10 changes in 2 hunks. Retry needed for header fix."
+    }
+  ]
+}

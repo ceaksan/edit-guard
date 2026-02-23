@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S16",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:24:18.309967",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 4500,
+      "tokens_out": 2500,
+      "tokens_total": 7000,
+      "duration_s": 10.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Write (script) + 1 Bash (run+delete). 10 sed commands on 1053-line file. Lowest token cost. No file content needed."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S06",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:13:53.466998",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 8000,
+      "tokens_out": 6000,
+      "tokens_total": 14000,
+      "duration_s": 20.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Read + 1 Write on 378-line file with 10 changes. All applied correctly. Higher output tokens due to full file rewrite but fewer tool calls than sequential."
+    }
+  ]
+}

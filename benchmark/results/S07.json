@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S07",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T20:57:40.323463",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 25000,
+      "tokens_out": 18000,
+      "tokens_total": 43000,
+      "duration_s": 45.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Read + 1 Write on 1053-line file. All 5 changes applied correctly. No lost-in-the-middle. Line count preserved exactly."
+    }
+  ]
+}

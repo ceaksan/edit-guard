@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S02",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:12:52.631781",
+      "success": true,
+      "tool_calls": 11,
+      "tokens_in": 15000,
+      "tokens_out": 4000,
+      "tokens_total": 19000,
+      "duration_s": 55.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Read + 10 sequential Edits on 378-line file. All matched first try. Hook warned at 3,5,6,7,8,9,10 consecutive edits. No line drift because all strings are unique. High token cost from repeated file context."
+    }
+  ]
+}

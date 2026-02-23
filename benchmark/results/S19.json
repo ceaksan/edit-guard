@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S19",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:10:36.169752",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 5000,
+      "tokens_out": 2000,
+      "tokens_total": 7000,
+      "duration_s": 12.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "Used diff -u to generate patch from sed-modified copy, then patch -p0. Clean first-try success. 3 hunks across 1053-line file."
+    }
+  ]
+}

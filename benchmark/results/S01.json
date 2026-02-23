@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S01",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T20:46:26.588494",
+      "success": true,
+      "tool_calls": 6,
+      "tokens_in": 12000,
+      "tokens_out": 2500,
+      "tokens_total": 14500,
+      "duration_s": 35.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "Hook warned at 3, alerted at 5. All edits matched first try."
+    }
+  ]
+}

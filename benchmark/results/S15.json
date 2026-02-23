@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S15",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:01:24.558232",
+      "success": true,
+      "tool_calls": 2,
+      "tokens_in": 4000,
+      "tokens_out": 1500,
+      "tokens_total": 5500,
+      "duration_s": 10.0,
+      "retries": 0,
+      "failure_mode": null,
+      "notes": "1 Write (script) + 1 Bash (run+delete). Lowest token cost. No file content in output tokens. sed handles all 5 changes atomically."
+    }
+  ]
+}

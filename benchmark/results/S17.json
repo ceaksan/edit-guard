@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S17",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-02-23T21:09:10.472520",
+      "success": true,
+      "tool_calls": 4,
+      "tokens_in": 5000,
+      "tokens_out": 2000,
+      "tokens_total": 7000,
+      "duration_s": 15.0,
+      "retries": 1,
+      "failure_mode": null,
+      "notes": "First attempt had malformed patch (manual format). Used diff -u to generate correct patch, then applied with patch -p0. 2 extra tool calls due to retry. Patch approach requires exact context matching."
+    }
+  ]
+}
