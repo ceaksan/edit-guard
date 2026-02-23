@@ -1,0 +1,392 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "LLM Bulk Edit Benchmark - 20 scenarios testing 5 approaches across 2 file sizes and 2 change counts",
+    "fixture_files": {
+      "small": "fixtures/fixture-300.tsx",
+      "large": "fixtures/fixture-1000.tsx"
+    },
+    "approaches": [
+      "sequential_edit",
+      "atomic_write",
+      "bottom_up_edit",
+      "script_generation",
+      "unified_diff"
+    ],
+    "runs_per_scenario": 3
+  },
+  "changes": {
+    "small_5": {
+      "description": "5 changes across fixture-300.tsx",
+      "changes": [
+        {
+          "id": "C1",
+          "location": "line ~39",
+          "old": "const API_BASE_URL = \"/api/v1\";",
+          "new": "const API_BASE_URL = \"/api/v2\";",
+          "description": "Update API version"
+        },
+        {
+          "id": "C2",
+          "location": "line ~40",
+          "old": "const DEFAULT_PAGE_SIZE = 25;",
+          "new": "const DEFAULT_PAGE_SIZE = 50;",
+          "description": "Increase default page size"
+        },
+        {
+          "id": "C3",
+          "location": "line ~45",
+          "old": "admin: \"Administrator\",",
+          "new": "admin: \"System Admin\",",
+          "description": "Rename admin role label"
+        },
+        {
+          "id": "C4",
+          "location": "line ~51",
+          "old": "admin: \"bg-red-100 text-red-800\",",
+          "new": "admin: \"bg-purple-100 text-purple-800\",",
+          "description": "Change admin badge color"
+        },
+        {
+          "id": "C5",
+          "location": "line ~211",
+          "old": "<h1 className=\"text-2xl font-bold\">User Management</h1>",
+          "new": "<h1 className=\"text-3xl font-bold tracking-tight\">User Management</h1>",
+          "description": "Update heading style"
+        }
+      ]
+    },
+    "small_10": {
+      "description": "10 changes across fixture-300.tsx",
+      "changes": [
+        {
+          "id": "C1",
+          "location": "line ~39",
+          "old": "const API_BASE_URL = \"/api/v1\";",
+          "new": "const API_BASE_URL = \"/api/v2\";",
+          "description": "Update API version"
+        },
+        {
+          "id": "C2",
+          "location": "line ~40",
+          "old": "const DEFAULT_PAGE_SIZE = 25;",
+          "new": "const DEFAULT_PAGE_SIZE = 50;",
+          "description": "Increase default page size"
+        },
+        {
+          "id": "C3",
+          "location": "line ~41",
+          "old": "const DEBOUNCE_DELAY = 300;",
+          "new": "const DEBOUNCE_DELAY = 500;",
+          "description": "Increase debounce delay"
+        },
+        {
+          "id": "C4",
+          "location": "line ~42",
+          "old": "const CACHE_TTL = 5 * 60 * 1000;",
+          "new": "const CACHE_TTL = 10 * 60 * 1000;",
+          "description": "Double cache TTL"
+        },
+        {
+          "id": "C5",
+          "location": "line ~45",
+          "old": "admin: \"Administrator\",",
+          "new": "admin: \"System Admin\",",
+          "description": "Rename admin role label"
+        },
+        {
+          "id": "C6",
+          "location": "line ~47",
+          "old": "viewer: \"Viewer\",",
+          "new": "viewer: \"Read Only\",",
+          "description": "Rename viewer role label"
+        },
+        {
+          "id": "C7",
+          "location": "line ~51",
+          "old": "admin: \"bg-red-100 text-red-800\",",
+          "new": "admin: \"bg-purple-100 text-purple-800\",",
+          "description": "Change admin badge color"
+        },
+        {
+          "id": "C8",
+          "location": "line ~88",
+          "old": "throw new Error(`Failed to fetch users: ${response.statusText}`);",
+          "new": "throw new Error(`API Error ${response.status}: ${response.statusText}`);",
+          "description": "Improve error message"
+        },
+        {
+          "id": "C9",
+          "location": "line ~147",
+          "old": "placeholder=\"Search users...\"",
+          "new": "placeholder=\"Search by name or email...\"",
+          "description": "Update search placeholder"
+        },
+        {
+          "id": "C10",
+          "location": "line ~211",
+          "old": "<h1 className=\"text-2xl font-bold\">User Management</h1>",
+          "new": "<h1 className=\"text-3xl font-bold tracking-tight\">User Management</h1>",
+          "description": "Update heading style"
+        }
+      ]
+    },
+    "large_5": {
+      "description": "5 changes across fixture-1000.tsx (spread across file)",
+      "changes": [
+        {
+          "id": "C1",
+          "location": "line ~49",
+          "old": "const API_BASE = \"/api/v2\";",
+          "new": "const API_BASE = \"/api/v3\";",
+          "description": "Update API version"
+        },
+        {
+          "id": "C2",
+          "location": "line ~50",
+          "old": "const PAGE_SIZE = 25;",
+          "new": "const PAGE_SIZE = 50;",
+          "description": "Increase page size"
+        },
+        {
+          "id": "C3",
+          "location": "line ~54",
+          "old": "admin: \"Administrator\",",
+          "new": "admin: \"System Admin\",",
+          "description": "Rename admin role label"
+        },
+        {
+          "id": "C4",
+          "location": "line ~267",
+          "old": "function fmtNum(v: number): string {",
+          "new": "function formatNumber(v: number): string {",
+          "description": "Rename fmtNum to formatNumber"
+        },
+        {
+          "id": "C5",
+          "location": "line ~733",
+          "old": "export default function AnalyticsDashboard() {",
+          "new": "export default function AnalyticsDashboardPage() {",
+          "description": "Rename main component"
+        }
+      ]
+    },
+    "large_10": {
+      "description": "10 changes across fixture-1000.tsx (spread across file)",
+      "changes": [
+        {
+          "id": "C1",
+          "location": "line ~49",
+          "old": "const API_BASE = \"/api/v2\";",
+          "new": "const API_BASE = \"/api/v3\";",
+          "description": "Update API version"
+        },
+        {
+          "id": "C2",
+          "location": "line ~50",
+          "old": "const PAGE_SIZE = 25;",
+          "new": "const PAGE_SIZE = 50;",
+          "description": "Increase page size"
+        },
+        {
+          "id": "C3",
+          "location": "line ~51",
+          "old": "const DEBOUNCE_MS = 300;",
+          "new": "const DEBOUNCE_MS = 500;",
+          "description": "Increase debounce"
+        },
+        {
+          "id": "C4",
+          "location": "line ~52",
+          "old": "const POLL_MS = 30_000;",
+          "new": "const POLL_MS = 60_000;",
+          "description": "Double poll interval"
+        },
+        {
+          "id": "C5",
+          "location": "line ~54",
+          "old": "admin: \"Administrator\",",
+          "new": "admin: \"System Admin\",",
+          "description": "Rename admin role label"
+        },
+        {
+          "id": "C6",
+          "location": "line ~267",
+          "old": "function fmtNum(v: number): string {",
+          "new": "function formatNumber(v: number): string {",
+          "description": "Rename fmtNum to formatNumber"
+        },
+        {
+          "id": "C7",
+          "location": "line ~279",
+          "old": "function fmtPct(v: number): string {",
+          "new": "function formatPercent(v: number): string {",
+          "description": "Rename fmtPct to formatPercent"
+        },
+        {
+          "id": "C8",
+          "location": "line ~410",
+          "old": "function UserTable({",
+          "new": "function UsersDataTable({",
+          "description": "Rename UserTable component"
+        },
+        {
+          "id": "C9",
+          "location": "line ~573",
+          "old": "function UserEditModal({",
+          "new": "function EditUserDialog({",
+          "description": "Rename UserEditModal component"
+        },
+        {
+          "id": "C10",
+          "location": "line ~733",
+          "old": "export default function AnalyticsDashboard() {",
+          "new": "export default function AnalyticsDashboardPage() {",
+          "description": "Rename main component"
+        }
+      ]
+    }
+  },
+  "scenarios": [
+    {
+      "id": "S01",
+      "approach": "sequential_edit",
+      "fixture": "small",
+      "change_set": "small_5",
+      "prompt": "Make these 5 changes to benchmark/fixtures/fixture-300.tsx using the Edit tool, one change at a time:\n1. Change API_BASE_URL from /api/v1 to /api/v2\n2. Change DEFAULT_PAGE_SIZE from 25 to 50\n3. Change admin role label from Administrator to System Admin\n4. Change admin badge color from bg-red-100 text-red-800 to bg-purple-100 text-purple-800\n5. Change heading from text-2xl font-bold to text-3xl font-bold tracking-tight"
+    },
+    {
+      "id": "S02",
+      "approach": "sequential_edit",
+      "fixture": "small",
+      "change_set": "small_10",
+      "prompt": "Make these 10 changes to benchmark/fixtures/fixture-300.tsx using the Edit tool, one change at a time:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. DEBOUNCE_DELAY 300 -> 500\n4. CACHE_TTL 5 * 60 * 1000 -> 10 * 60 * 1000\n5. admin label Administrator -> System Admin\n6. viewer label Viewer -> Read Only\n7. admin badge bg-red -> bg-purple\n8. Error message to include status code\n9. Search placeholder to Search by name or email...\n10. Heading text-2xl -> text-3xl tracking-tight"
+    },
+    {
+      "id": "S03",
+      "approach": "sequential_edit",
+      "fixture": "large",
+      "change_set": "large_5",
+      "prompt": "Make these 5 changes to benchmark/fixtures/fixture-1000.tsx using the Edit tool, one change at a time:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. Rename fmtNum to formatNumber\n5. Rename AnalyticsDashboard to AnalyticsDashboardPage"
+    },
+    {
+      "id": "S04",
+      "approach": "sequential_edit",
+      "fixture": "large",
+      "change_set": "large_10",
+      "prompt": "Make these 10 changes to benchmark/fixtures/fixture-1000.tsx using the Edit tool, one change at a time:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. DEBOUNCE_MS 300 -> 500\n4. POLL_MS 30_000 -> 60_000\n5. admin label Administrator -> System Admin\n6. Rename fmtNum -> formatNumber\n7. Rename fmtPct -> formatPercent\n8. Rename UserTable -> UsersDataTable\n9. Rename UserEditModal -> EditUserDialog\n10. Rename AnalyticsDashboard -> AnalyticsDashboardPage"
+    },
+    {
+      "id": "S05",
+      "approach": "atomic_write",
+      "fixture": "small",
+      "change_set": "small_5",
+      "prompt": "Read benchmark/fixtures/fixture-300.tsx, apply ALL 5 of these changes, then write the complete file back with a single Write:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. admin badge bg-red -> bg-purple\n5. Heading text-2xl font-bold -> text-3xl font-bold tracking-tight\nIMPORTANT: Use exactly ONE Write call with the complete file content."
+    },
+    {
+      "id": "S06",
+      "approach": "atomic_write",
+      "fixture": "small",
+      "change_set": "small_10",
+      "prompt": "Read benchmark/fixtures/fixture-300.tsx, apply ALL 10 of these changes, then write the complete file back with a single Write:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. DEBOUNCE_DELAY 300 -> 500\n4. CACHE_TTL 5*60*1000 -> 10*60*1000\n5. admin label Administrator -> System Admin\n6. viewer label Viewer -> Read Only\n7. admin badge bg-red -> bg-purple\n8. Error message format\n9. Search placeholder\n10. Heading style\nIMPORTANT: Use exactly ONE Write call with the complete file content."
+    },
+    {
+      "id": "S07",
+      "approach": "atomic_write",
+      "fixture": "large",
+      "change_set": "large_5",
+      "prompt": "Read benchmark/fixtures/fixture-1000.tsx, apply ALL 5 of these changes, then write the complete file back with a single Write:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. Rename fmtNum -> formatNumber\n5. Rename AnalyticsDashboard -> AnalyticsDashboardPage\nIMPORTANT: Use exactly ONE Write call with the complete file content."
+    },
+    {
+      "id": "S08",
+      "approach": "atomic_write",
+      "fixture": "large",
+      "change_set": "large_10",
+      "prompt": "Read benchmark/fixtures/fixture-1000.tsx, apply ALL 10 of these changes, then write the complete file back with a single Write:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. DEBOUNCE_MS 300 -> 500\n4. POLL_MS 30_000 -> 60_000\n5. admin label Administrator -> System Admin\n6. Rename fmtNum -> formatNumber\n7. Rename fmtPct -> formatPercent\n8. Rename UserTable -> UsersDataTable\n9. Rename UserEditModal -> EditUserDialog\n10. Rename AnalyticsDashboard -> AnalyticsDashboardPage\nIMPORTANT: Use exactly ONE Write call with the complete file content."
+    },
+    {
+      "id": "S09",
+      "approach": "bottom_up_edit",
+      "fixture": "small",
+      "change_set": "small_5",
+      "prompt": "Make these 5 changes to benchmark/fixtures/fixture-300.tsx using the Edit tool. CRITICAL: Apply changes from BOTTOM of file to TOP to prevent line drift:\n1. (LAST) Heading text-2xl font-bold -> text-3xl font-bold tracking-tight (~line 211)\n2. admin badge bg-red -> bg-purple (~line 51)\n3. admin label Administrator -> System Admin (~line 45)\n4. DEFAULT_PAGE_SIZE 25 -> 50 (~line 40)\n5. (FIRST) API_BASE_URL /api/v1 -> /api/v2 (~line 39)"
+    },
+    {
+      "id": "S10",
+      "approach": "bottom_up_edit",
+      "fixture": "small",
+      "change_set": "small_10",
+      "prompt": "Make these 10 changes to benchmark/fixtures/fixture-300.tsx using the Edit tool. CRITICAL: Apply changes from BOTTOM of file to TOP to prevent line drift:\n1. Heading text-2xl -> text-3xl tracking-tight (~line 211)\n2. Search placeholder (~line 147)\n3. Error message format (~line 88)\n4. admin badge bg-red -> bg-purple (~line 51)\n5. viewer label Viewer -> Read Only (~line 47)\n6. admin label Administrator -> System Admin (~line 45)\n7. CACHE_TTL 5*60*1000 -> 10*60*1000 (~line 42)\n8. DEBOUNCE_DELAY 300 -> 500 (~line 41)\n9. DEFAULT_PAGE_SIZE 25 -> 50 (~line 40)\n10. API_BASE_URL /api/v1 -> /api/v2 (~line 39)"
+    },
+    {
+      "id": "S11",
+      "approach": "bottom_up_edit",
+      "fixture": "large",
+      "change_set": "large_5",
+      "prompt": "Make these 5 changes to benchmark/fixtures/fixture-1000.tsx using the Edit tool. CRITICAL: Apply changes from BOTTOM of file to TOP to prevent line drift:\n1. Rename AnalyticsDashboard -> AnalyticsDashboardPage (~line 733)\n2. Rename fmtNum -> formatNumber (~line 267)\n3. admin label Administrator -> System Admin (~line 54)\n4. PAGE_SIZE 25 -> 50 (~line 50)\n5. API_BASE /api/v2 -> /api/v3 (~line 49)"
+    },
+    {
+      "id": "S12",
+      "approach": "bottom_up_edit",
+      "fixture": "large",
+      "change_set": "large_10",
+      "prompt": "Make these 10 changes to benchmark/fixtures/fixture-1000.tsx using the Edit tool. CRITICAL: Apply changes from BOTTOM of file to TOP to prevent line drift:\n1. Rename AnalyticsDashboard -> AnalyticsDashboardPage (~line 733)\n2. Rename UserEditModal -> EditUserDialog (~line 573)\n3. Rename UserTable -> UsersDataTable (~line 410)\n4. Rename fmtPct -> formatPercent (~line 279)\n5. Rename fmtNum -> formatNumber (~line 267)\n6. admin label Administrator -> System Admin (~line 54)\n7. POLL_MS 30_000 -> 60_000 (~line 52)\n8. DEBOUNCE_MS 300 -> 500 (~line 51)\n9. PAGE_SIZE 25 -> 50 (~line 50)\n10. API_BASE /api/v2 -> /api/v3 (~line 49)"
+    },
+    {
+      "id": "S13",
+      "approach": "script_generation",
+      "fixture": "small",
+      "change_set": "small_5",
+      "prompt": "Generate a Python script that applies these 5 changes to benchmark/fixtures/fixture-300.tsx, then run it with Bash:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. admin badge bg-red-100 text-red-800 -> bg-purple-100 text-purple-800\n5. Heading text-2xl font-bold -> text-3xl font-bold tracking-tight\nWrite the script to benchmark/temp_edit.py, run it, then delete the script."
+    },
+    {
+      "id": "S14",
+      "approach": "script_generation",
+      "fixture": "small",
+      "change_set": "small_10",
+      "prompt": "Generate a Python script that applies these 10 changes to benchmark/fixtures/fixture-300.tsx, then run it with Bash:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. DEBOUNCE_DELAY 300 -> 500\n4. CACHE_TTL 5 * 60 * 1000 -> 10 * 60 * 1000\n5. admin label Administrator -> System Admin\n6. viewer label Viewer -> Read Only\n7. admin badge bg-red-100 text-red-800 -> bg-purple-100 text-purple-800\n8. Error message to API Error ${response.status}: ${response.statusText}\n9. Search placeholder to Search by name or email...\n10. Heading text-2xl font-bold -> text-3xl font-bold tracking-tight\nWrite the script to benchmark/temp_edit.py, run it, then delete the script."
+    },
+    {
+      "id": "S15",
+      "approach": "script_generation",
+      "fixture": "large",
+      "change_set": "large_5",
+      "prompt": "Generate a Python script that applies these 5 changes to benchmark/fixtures/fixture-1000.tsx, then run it with Bash:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. Rename function fmtNum -> function formatNumber\n5. Rename function AnalyticsDashboard -> function AnalyticsDashboardPage\nWrite the script to benchmark/temp_edit.py, run it, then delete the script."
+    },
+    {
+      "id": "S16",
+      "approach": "script_generation",
+      "fixture": "large",
+      "change_set": "large_10",
+      "prompt": "Generate a Python script that applies these 10 changes to benchmark/fixtures/fixture-1000.tsx, then run it with Bash:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. DEBOUNCE_MS 300 -> 500\n4. POLL_MS 30_000 -> 60_000\n5. admin label Administrator -> System Admin\n6. Rename fmtNum -> formatNumber\n7. Rename fmtPct -> formatPercent\n8. Rename UserTable -> UsersDataTable\n9. Rename UserEditModal -> EditUserDialog\n10. Rename AnalyticsDashboard -> AnalyticsDashboardPage\nWrite the script to benchmark/temp_edit.py, run it, then delete the script."
+    },
+    {
+      "id": "S17",
+      "approach": "unified_diff",
+      "fixture": "small",
+      "change_set": "small_5",
+      "prompt": "Generate a unified diff (patch file) that applies these 5 changes to benchmark/fixtures/fixture-300.tsx, then apply it with `patch` command:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. admin badge bg-red -> bg-purple\n5. Heading text-2xl font-bold -> text-3xl font-bold tracking-tight\nWrite the diff to benchmark/temp.patch, apply with patch, then delete the patch file."
+    },
+    {
+      "id": "S18",
+      "approach": "unified_diff",
+      "fixture": "small",
+      "change_set": "small_10",
+      "prompt": "Generate a unified diff (patch file) that applies these 10 changes to benchmark/fixtures/fixture-300.tsx, then apply it with `patch` command:\n1. API_BASE_URL /api/v1 -> /api/v2\n2. DEFAULT_PAGE_SIZE 25 -> 50\n3. DEBOUNCE_DELAY 300 -> 500\n4. CACHE_TTL 5*60*1000 -> 10*60*1000\n5. admin label Administrator -> System Admin\n6. viewer label Viewer -> Read Only\n7. admin badge bg-red -> bg-purple\n8. Error message format\n9. Search placeholder\n10. Heading style\nWrite the diff to benchmark/temp.patch, apply with patch, then delete the patch file."
+    },
+    {
+      "id": "S19",
+      "approach": "unified_diff",
+      "fixture": "large",
+      "change_set": "large_5",
+      "prompt": "Generate a unified diff (patch file) that applies these 5 changes to benchmark/fixtures/fixture-1000.tsx, then apply it with `patch` command:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. admin label Administrator -> System Admin\n4. Rename fmtNum -> formatNumber\n5. Rename AnalyticsDashboard -> AnalyticsDashboardPage\nWrite the diff to benchmark/temp.patch, apply with patch, then delete the patch file."
+    },
+    {
+      "id": "S20",
+      "approach": "unified_diff",
+      "fixture": "large",
+      "change_set": "large_10",
+      "prompt": "Generate a unified diff (patch file) that applies these 10 changes to benchmark/fixtures/fixture-1000.tsx, then apply it with `patch` command:\n1. API_BASE /api/v2 -> /api/v3\n2. PAGE_SIZE 25 -> 50\n3. DEBOUNCE_MS 300 -> 500\n4. POLL_MS 30_000 -> 60_000\n5. admin label Administrator -> System Admin\n6. Rename fmtNum -> formatNumber\n7. Rename fmtPct -> formatPercent\n8. Rename UserTable -> UsersDataTable\n9. Rename UserEditModal -> EditUserDialog\n10. Rename AnalyticsDashboard -> AnalyticsDashboardPage\nWrite the diff to benchmark/temp.patch, apply with patch, then delete the patch file."
+    }
+  ]
+}
