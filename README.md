@@ -94,8 +94,6 @@ When should you use which editing approach?
 | 500+ lines    | 3+      | Script Generation                    |
 | 1000+ lines   | Any 3+  | Script Generation or Diff/Patch      |
 
-See [CLAUDE_MD_TEMPLATE.md](CLAUDE_MD_TEMPLATE.md) for copy-paste rules you can add to your project.
-
 ## Testing
 
 ```bash
