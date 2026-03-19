@@ -38,17 +38,35 @@ Or add manually to your project's `.claude/settings.json`:
 
 ### F1: Sequential Edit Counter
 
-Tracks consecutive Edit tool calls on the same file. Warns after 3 (configurable) and escalates after 5.
+Tracks consecutive Edit tool calls on the same file. Issues a **non-blocking warning** after 3 edits (configurable) and a **blocking alert** after 5.
+
+**Warning (non-blocking, exit 0):** The agent sees the feedback but continues working.
 
 ```
 [edit-guard] WARNING: 3 consecutive Edits on /src/components/App.tsx
-  Consider switching to a single Write (for files < 500 lines)
-  or generating a Python/sed script (for larger files).
+  File is 180 lines. Use a single Write (single Read + single Write) for 3+ changes on small files.
 ```
+
+**Alert (blocking, exit 2):** The edit is blocked, forcing the agent to change approach.
+
+```
+[edit-guard] ALERT: 5 consecutive Edits on /src/components/App.tsx
+  This is well above the safe limit. File is 180 lines. Use a single Write (single Read + single Write) for 5+ changes on small files.
+  Sequential Edits cause line drift, match failures, and wasted tokens.
+```
+
+Recommendations are context-aware based on actual file size:
+
+| File Size     | Recommendation                           |
+| ------------- | ---------------------------------------- |
+| < 300 lines   | Atomic Write (single Read + single Write)|
+| 300-500 lines | Bottom-up Edit or Python script          |
+| 500-1000      | Python script generation                 |
+| 1000+ lines   | Python script or unified diff/patch      |
 
 ### F2: Post-Write Line Count Verification
 
-Compares written content against the file's previously known line count. Detects significant drops that indicate content loss.
+Compares written content against the file's previously known line count. Detects significant drops that indicate content loss. This is always a **blocking alert**.
 
 ```
 [edit-guard] ALERT: Write reduced /src/pages/index.astro from 500 to 280 lines (-220 lines, -44%)
@@ -58,12 +76,19 @@ Compares written content against the file's previously known line count. Detects
 
 ### F3: Disk Mismatch Detection
 
-After Write, compares the intended content with what's actually on disk. Catches cases where formatters or hooks modify the file.
+After Write, compares the intended content with what's actually on disk. Catches cases where formatters or hooks modify the file. This is a **non-blocking warning**.
 
 ```
 [edit-guard] WARNING: Write content (100 lines) differs from file on disk (111 lines)
   A formatter or hook may have modified the file after writing.
 ```
+
+## Exit Code Behavior
+
+| Severity | Exit Code | Effect                                    | When                          |
+| -------- | --------- | ----------------------------------------- | ----------------------------- |
+| WARNING  | 0         | Feedback to agent, does not block          | Sequential edits at threshold |
+| ALERT    | 2         | Blocks the operation, agent must adapt     | Sequential edits well above threshold, content loss detected |
 
 ## Configuration
 
@@ -72,6 +97,7 @@ Environment variables:
 | Variable               | Default | Description                                |
 | ---------------------- | ------- | ------------------------------------------ |
 | `EDIT_GUARD_WARN`      | `3`     | Sequential edit warning threshold          |
+| `EDIT_GUARD_ALERT`     | `5`     | Sequential edit blocking threshold         |
 | `EDIT_GUARD_LINE_DROP` | `0.2`   | Line drop percentage threshold (0.2 = 20%) |
 | `EDIT_GUARD_MIN_LINES` | `10`    | Minimum lines lost to trigger warning      |
 
@@ -80,7 +106,8 @@ Environment variables:
 - Runs as a `PostToolUse` hook on `Read`, `Edit`, and `Write` operations
 - Persists state to `.state/edit-state.json` (gitignored)
 - State resets on session change
-- Exit 0 = all checks pass, Exit 2 = warning via stderr
+- Tracks per-file: consecutive edit count, known line count
+- Binary files are automatically skipped
 
 ## Decision Matrix
 
@@ -89,7 +116,7 @@ When should you use which editing approach?
 | File Size     | Changes | Recommended                          |
 | ------------- | ------- | ------------------------------------ |
 | Any           | 1-2     | Sequential Edit                      |
-| < 300 lines   | 3+      | Atomic Write (Read once, Write once) |
+| < 300 lines   | 3+      | Atomic Write (single Read + single Write) |
 | 300-500 lines | 3+      | Bottom-up Edit or Script Generation  |
 | 500+ lines    | 3+      | Script Generation                    |
 | 1000+ lines   | Any 3+  | Script Generation or Diff/Patch      |
@@ -99,6 +126,8 @@ When should you use which editing approach?
 ```bash
 python3 -m pytest tests/ -v
 ```
+
+31 tests covering all features, smart recommendations, and edge cases.
 
 ## Related
 

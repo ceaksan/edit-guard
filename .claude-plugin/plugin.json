@@ -1,7 +1,7 @@
 {
   "name": "edit-guard",
   "description": "Enforces safe file editing practices for AI agents. Tracks sequential edits, verifies line counts after writes, and detects content loss.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "ceaksan"
   },
