@@ -16,6 +16,20 @@ AI coding agents (Claude Code, Cursor, Copilot) break in predictable ways when e
 
 edit-guard catches these before they cause problems.
 
+## What happens without it
+
+A typical failure on a 400-line React component:
+
+1. Claude makes Edit #1 (line 50). Works.
+2. A formatter runs, reformats the file. Line numbers shift.
+3. Claude makes Edit #2 (line 120). The exact string match fails because the formatter changed whitespace.
+4. Claude retries with a slightly different match. Works, but now the internal line map is stale.
+5. Claude makes Edit #3 (line 200). Targets a string that no longer exists at that position. Fails.
+6. Claude falls back to a full Write. Regenerates the entire file. Middle 80 lines are silently dropped.
+7. Build passes. Tests pass. Content is gone. You find out in production.
+
+edit-guard stops this at step 3 with a warning and at step 5 with a block, before content loss happens.
+
 ## Installation
 
 ```bash
